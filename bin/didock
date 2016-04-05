@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+
+$appVersion = '{VERSION}';
+
+$application = new Application('DiDock', $appVersion);
+$application->add(new \DS\DiDock\Command\InstallCommand());
+$application->add(new \DS\DiDock\Command\UseCommand());
+$application->run();

@@ -1,0 +1,23 @@
+{
+    "name": "dario_swain/didock",
+    "description": "Experimental development environment based on Docker services",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ilya Pokamestov",
+            "email": "dario_swain@yahoo.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "symfony/console": "~3.0",
+        "symfony/process": "~3.0",
+        "docker-php/docker-php": "~1.22"
+    },
+    "autoload": {
+        "psr-4": {
+            "DS\\DiDock\\": "src/"
+        }
+    }
+}
