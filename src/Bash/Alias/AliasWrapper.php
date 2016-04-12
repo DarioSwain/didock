@@ -12,6 +12,8 @@ namespace DS\DiDock\Bash\Alias;
 
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
 /**
  * Class AliasWrapper
@@ -48,6 +50,19 @@ EOD;
         if (!$this->exists($alias)) {
             $this->writeAlias($alias);
         }
+    }
+
+    public function updateAliases()
+    {
+        //TODO: Not working now.
+        $process = new Process(sprintf('source %s', $this->bashRcLocation));
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+
+         return $process->getOutput();
     }
 
     protected function exists(Alias $alias)
@@ -111,6 +126,4 @@ EOD;
             $this->fileSystem->touch($this->diDockAliasLocation);
         }
     }
-
-
 }

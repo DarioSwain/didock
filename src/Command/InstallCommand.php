@@ -10,11 +10,10 @@
 
 namespace DS\DiDock\Command;
 
-use DS\DiDock\Bash\Alias\Alias;
-use DS\DiDock\Bash\Alias\AliasWrapper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class InstallCommand
@@ -28,15 +27,15 @@ class InstallCommand extends Command
     {
         $this
             ->setName('install')
-            ->setDescription('Install DiDock service.')
+            ->setDescription('Install DiDock tool.')
         ;
     }
 
     /** {@inheritdoc} */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $aliasWrapper = new AliasWrapper();
-        $aliasWrapper->addAlias(new Alias('la', 'ls -la'));
-        $output->writeln('Done.');
+        $defaultDiDockShellScriptLocation = '/didock/bin/didock';
+        $fileSystem = new Filesystem();
+        $fileSystem->copy(__DIR__.'/../../bin/didock.sh', $defaultDiDockShellScriptLocation);
     }
 }
